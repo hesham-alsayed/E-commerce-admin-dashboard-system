@@ -1,0 +1,26 @@
+@import "tailwindcss";
+
+/* BODY SCROLLBAR ONLY - THIN MODERN DESIGN */
+body::-webkit-scrollbar {
+  width: 4px; /* Vertical scrollbar */
+  height: 4px; /* Horizontal scrollbar */
+}
+
+body::-webkit-scrollbar-track {
+  background: #f0f0f0;
+  border-radius: 8px;
+}
+
+body::-webkit-scrollbar-thumb {
+  background: #a0a0a0;
+  border-radius: 8px;
+  min-height: 20px;
+  transition: all 0.2s ease;
+}
+
+/* 🔥 FIX: Body scrollbar NEVER hides */
+body,
+html {
+  overflow: overlay !important;
+  scroll-behavior: auto !important;
+}
