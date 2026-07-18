@@ -10,19 +10,26 @@ export const api = axios.create({
   withCredentials: true,
 });
 
-let authToken = null;
+const TOKEN_KEY = "admin_auth_token";
+
+export const getAuthToken = () => localStorage.getItem(TOKEN_KEY);
 
 export const setAuthToken = (token) => {
-  authToken = token;
+  if (token) {
+    localStorage.setItem(TOKEN_KEY, token);
+  } else {
+    localStorage.removeItem(TOKEN_KEY);
+  }
 };
 
 export const clearAuthToken = () => {
-  authToken = null;
+  localStorage.removeItem(TOKEN_KEY);
 };
 
 api.interceptors.request.use((config) => {
-  if (authToken) {
-    config.headers.Authorization = `Bearer ${authToken}`;
+  const token = getAuthToken();
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
   }
   return config;
 });
