@@ -1,4 +1,4 @@
-import { api } from ".";
+import { api, setAuthToken, clearAuthToken } from ".";
 
 // ✅ FORCE COOKIES ON ALL REQUESTS
 api.defaults.withCredentials = true;
@@ -9,6 +9,9 @@ export const login = async (data) => {
     const res = await api.post("/authentication/auth-login", data, {
       withCredentials: true,
     });
+    if (res.data?.token) {
+      setAuthToken(res.data.token);
+    }
     return res.data;
   } catch (error) {
     console.log(error);
@@ -42,6 +45,7 @@ export const logout = async () => {
         withCredentials: true,
       },
     );
+    clearAuthToken();
     console.log("Session cleared");
   } catch (error) {
     console.error("Logout error:", error);

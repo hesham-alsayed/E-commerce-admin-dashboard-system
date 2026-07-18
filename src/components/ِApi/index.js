@@ -9,3 +9,27 @@ export const api = axios.create({
   },
   withCredentials: true,
 });
+
+const TOKEN_KEY = "admin_auth_token";
+
+export const getAuthToken = () => localStorage.getItem(TOKEN_KEY);
+
+export const setAuthToken = (token) => {
+  if (token) {
+    localStorage.setItem(TOKEN_KEY, token);
+  } else {
+    localStorage.removeItem(TOKEN_KEY);
+  }
+};
+
+export const clearAuthToken = () => {
+  localStorage.removeItem(TOKEN_KEY);
+};
+
+api.interceptors.request.use((config) => {
+  const token = getAuthToken();
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+  return config;
+});
