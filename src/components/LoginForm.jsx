@@ -74,6 +74,12 @@ export function LoginForm({ onSignUpClick }) {
         </CardDescription>
       </CardHeader>
 
+      <div className="mx-6 mb-2 p-3 bg-yellow-50 border border-yellow-200 rounded-md text-xs text-yellow-800 space-y-1">
+        <p className="font-semibold">Demo Credentials:</p>
+        <p>Email: heshamelsauied@gmail.com</p>
+        <p>Password: Hh123@#$</p>
+      </div>
+
       <CardContent>
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
           {/* EMAIL */}
